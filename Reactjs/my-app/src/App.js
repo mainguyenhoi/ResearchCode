@@ -1,18 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
-import React from 'react'
+import React from 'react';
+import { MuiPickersUtilsProvider, DatePicker  } from '@material-ui/pickers';
+import TextField from "@material-ui/core/TextField";
+import MomentUtils from '@date-io/moment';
 
-class App extends React.Component {
-  componentDidMount() {
-    console.log('this is componentDidmount');
-  }
-  render(){
-    console.log('Render lifecycle')
-    return(
-      <h1>day la render</h1>
-    );
-    
-  }
-}
+import moment from 'moment';
 
-export default App;
+export default function BasicDatePicker() {
+
+  const [value, setValue] = React.useState<Date | null>(new Date());
+  return (
+    <div>
+      <MuiPickersUtilsProvider
+        libInstance={moment}
+        utils={MomentUtils}
+        locale={'vi'}
+      >
+       <DatePicker
+      label="Basic example"
+      value={value}
+      onChange={(newValue) => setValue(newValue)}
+      renderInput={(props) => <TextField {...props} />}
+    />
+      </MuiPickersUtilsProvider>
+     
+    </div>
+  );
+};
+
+
+
+
+
